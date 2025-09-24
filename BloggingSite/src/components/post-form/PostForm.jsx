@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
 import {useForm} from 'react-hook-form'
 import { Button, Input, RTE, Select } from '../index.js'
-import Service from "../../appwrite/config.js";
+import service from "../../appwrite/config.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -20,12 +20,12 @@ function PostForm({post}) {
 
     const submit  = async (data) => {
         if (post) {
-            const file = data.image[0] ? Service.uploadFile(data.image[0]) : null;
+            const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
 
             if (file) {
-                Service.deleteFile(post.featuredImage)
+                service.deleteFile(post.featuredImage)
             }
-            const dbPost = await Service.updatePost
+            const dbPost = await service.updatePost
             (post.$id, {
                 ...data,
                 featuredImage: file ? file.$id : undefined,
@@ -34,13 +34,13 @@ function PostForm({post}) {
                 navigate(`/post/${dbPost.$id}`)
             }
         } else {
-            const file = await Service.uploadFile(data.image[0]);
+            const file = await service.uploadFile(data.image[0]);
 
             if (file) {
                 const fileID = file.$id
                 data.featuredImage = fileID
 
-                await Service.createPost({
+            const dbPost =   await service.createPost({
                     ...data,
                     userId: userData.$id,
                 })

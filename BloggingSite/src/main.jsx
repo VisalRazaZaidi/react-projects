@@ -7,6 +7,13 @@ import store from "./store/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthLayout, Login } from "./components/index.js";
 
+
+import Home from "./pages/Home.jsx";
+import AddPost from "./pages/AddPost";
+import Signup from './pages/SignUp';
+import EditPost from "./pages/EditPost";
+import AllPosts from "./pages/AllPost.jsx"
+
 const router = createBrowserRouter([
   {
     path:'/',
@@ -59,19 +66,19 @@ const router = createBrowserRouter([
                 </AuthLayout>
             ),
         },
-        {
-            path: "/post/:slug",
-            element: <Post />,
-        },
+        // {
+        //     path: "/post/:slug",
+        //     element: <Post />,
+        // },
 
     ]
   }
 ])
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router}/>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
 );

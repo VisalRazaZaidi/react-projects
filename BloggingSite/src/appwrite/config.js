@@ -52,7 +52,7 @@ export class Service{
         }
     }
     
-    async getPost({slug}) {
+    async getPosts({slug}) {
         try {
             await databases.getDocument(
                 conf.appwriteDatabaseId, 
@@ -116,4 +116,4 @@ export class Service{
 
 
 const service = new Service ()
-export default Service
+export default service
