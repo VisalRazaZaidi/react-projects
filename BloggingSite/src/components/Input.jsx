@@ -1,7 +1,7 @@
 import React, {useId} from 'react'
 
 const Input = React.forwardRef( function Input({
-    lable,
+    label,
     text = "text",
     className = "",
     ...props
@@ -9,10 +9,10 @@ const Input = React.forwardRef( function Input({
     const id = useId()
     return (
      <div className='w-full'>
-        {lable && <lable className='inline-block mb-1 pl-1'
+        {label && <label className='inline-block mb-1 pl-1'
         htmlFor={id}>
             {lable}
-            </lable>
+            </label>
         }
         <input 
         type="text"
