@@ -12,6 +12,7 @@ export class Service{
         .setProject(conf.appwriteProjectId)
         this.databases = new Databases(this.client)
         this.storage = new Storage(this.client);
+        this.account = new Account(this.client);
     } 
 
     async createPost({title, slug, content, featuredImage, status, userId}) {
@@ -50,6 +51,16 @@ export class Service{
             return false
         }
     }
+
+    async getCurrentUser() {
+        try {
+            return await this.account.get();
+        } catch (error) {
+            console.log("Appwrite service :: getCurrentUser :: error", error);
+            return null;
+        }
+    }
+
     
     async getPosts(slug) {
         try {
@@ -83,7 +94,7 @@ export class Service{
     try {
          return await this.storage.createFile(
             conf.appwriteBucketId,
-            ID.unique,
+            ID.unique(),
             file,
          )
     } catch (error) {

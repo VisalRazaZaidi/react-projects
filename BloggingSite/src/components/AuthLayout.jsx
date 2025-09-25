@@ -8,6 +8,8 @@ export default function Protected({children, authentication = true}) {
     const authStatus = useSelector(state => state.auth.status)
 
     useEffect(() => {
+        if (authStatus === null) return; // still loading, don’t redirect yet
+
         if (authentication && authStatus !== authentication) {
             navigate("/login")
         } else if (!authentication && authStatus !== authentication) {
