@@ -7,8 +7,8 @@ export class AuthService {
 
     constructor() {
         this.client
-            .setEndpoint(conf.appwriteURL)
-            .setProject(conf.appwriteProjectId);
+            .setEndpoint(import.meta.env.VITE_APPWRITE_URL)
+            .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
         this.account = new Account(this.client)
     }
 
@@ -38,7 +38,7 @@ export class AuthService {
         try {
             return await this.account.get()
         } catch (error) {
-            if(error.code === 410 || error.type=== 'general_unauthorized_scope') return null;
+            if(error.code === 401 || error.type=== 'general_unauthorized_scope') return null;
             console.log(`Unauthorized Access : ${error}`);
         }
         return null;

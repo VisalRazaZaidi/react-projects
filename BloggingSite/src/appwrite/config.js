@@ -1,6 +1,12 @@
 import conf from "../config/config.js";
 import {Client,ID, Databases, Storage, Query, Account} from "appwrite"
 
+// console.log("URL:", conf.appwriteURL);
+// console.log("Project ID:", conf.appwriteProjectId);
+// console.log("Database ID:", conf.appwriteDatabaseId);
+// console.log("Collection ID:", conf.appwriteCollectionId);
+// console.log("Bucket ID:", conf.appwriteBucketId);
+
 
 export class Service{
     client = new Client();
@@ -8,8 +14,8 @@ export class Service{
     bucket;
     constructor (){
         this.client
-        .setEndpoint(conf.appwriteURL)
-        .setProject(conf.appwriteProjectId)
+        .setEndpoint(import.meta.env.VITE_APPWRITE_URL)
+        .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID)
         this.databases = new Databases(this.client)
         this.storage = new Storage(this.client);
         this.account = new Account(this.client);
@@ -75,12 +81,12 @@ export class Service{
         }
     }
 
-    async getPost(queries = [Query.equal("status", "active")]){
+    async getAllPost(queries = [Query.equal("status", "active")]){
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                queries
+                queries,
             )
         } catch (error) {
             console.log("Appwrite service :: getPost :: error", error)
