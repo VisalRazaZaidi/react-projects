@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 function Header() {
-  const authStatus = useSelector((state) => state.authstatus)
+  const authStatus = useSelector((state) => state.auth.state)
   const navigate = useNavigate()
 
   const navItems = [
@@ -50,10 +50,16 @@ function Header() {
           <ul className='flex ml-auto'>
               {navItems.map((item) => item.active ? (
                 <li key={item.name}>
-                  <button
+                  <Link
+                      to={item.slug}
+                      className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                    >
+                      {item.name}
+                    </Link>
+                  {/* <button
                   onClick={() => navigate(item.slug)} 
-                  className= 'inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                  >{item.name}</button>
+                  className= 'inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                  >{item.name}</button> */}
                 </li>
               ) : null)}
               {authStatus && (
