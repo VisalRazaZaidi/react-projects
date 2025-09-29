@@ -21,7 +21,8 @@ export class Service {
                 content,
                 featuredImage,
                 status,
-                userId
+                userId,
+                // slug,
             })
         } catch (error) {
             console.log("Appwrite service :: createPost :: error", error)

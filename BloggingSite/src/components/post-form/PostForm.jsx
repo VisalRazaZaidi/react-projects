@@ -16,7 +16,7 @@ function PostForm({post}) {
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.userData)
+    const userData = useSelector(state => state.auth.userData)
 
     const submit  = async (data) => {
         if (post) {
@@ -65,9 +65,9 @@ function PostForm({post}) {
     useEffect(() => {
         const subscription = watch((value, {name}) => {
             if (name === 'title') {
-                setValue(slug, slugTransform(value.title,
+                setValue("slug", slugTransform(value.title),
                     {shouldValidate: true}
-                ))
+                )
             }
         })
 
