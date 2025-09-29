@@ -96,6 +96,9 @@ export class Service {
                 conf.appwriteBucketId,
                 ID.unique(),
                 file,
+                [
+                    Permission.read(Role.any()) // 👈 public read access
+                ]
             )
         } catch (error) {
             console.log("Appwrite service :: uploadFile :: error", error)
@@ -116,8 +119,8 @@ export class Service {
         }
     }
 
-    getFilePreview(fileID) {
-        return this.storage.getFilePreview(
+    getFileview(fileID) {
+        return this.storage.getFileView(
             conf.appwriteBucketId,
             fileID,
         )

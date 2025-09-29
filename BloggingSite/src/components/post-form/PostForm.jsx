@@ -105,7 +105,7 @@ function PostForm({post}) {
                 {post && post.featuredImage && (
                     <div className="w-full mb-4">
                         <img
-                            src={service.getFilePreview(post.featuredImage)}
+                            src={service.getFileview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
