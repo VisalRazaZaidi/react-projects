@@ -116,10 +116,10 @@ export class Service {
         }
     }
 
-    getFilePreview(fileId) {
+    getFilePreview(fileID) {
         return this.storage.getFilePreview(
             conf.appwriteBucketId,
-            fileId
+            fileID,
         )
     }
 
